@@ -5,7 +5,7 @@ import BotLogic
     
     # Замени 'TOKEN' на токен твоего бота
     # Этот токен ты получаешь от BotFather, чтобы бот мог работать
-bot = telebot.TeleBot("7128259652:AAHFEiWG9tVEvfMGV_u-GrhlhiW9kmPOErU")
+bot = telebot.TeleBot("Token")
     
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -47,4 +47,5 @@ def echo_all(message):
     bot.reply_to(message, message.text)
     
 print("Бот запущен")
+
 bot.polling()

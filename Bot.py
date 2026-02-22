@@ -2,11 +2,14 @@ import random
 import telebot
 from telebot.types import ReactionTypeEmoji
 import BotLogic
-    
+import os
+
     # Замени 'TOKEN' на токен твоего бота
     # Этот токен ты получаешь от BotFather, чтобы бот мог работать
 bot = telebot.TeleBot("Token")
-    
+images = os.listdir('images')
+ship_images = os.listdir('ship_images')
+
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     bot.reply_to(message, "Привет! Я твой Telegram бот. Напиши что-нибудь!")
@@ -40,12 +43,22 @@ def send_coin(message):
 @bot.message_handler(commands=['bye'])
 def send_bye(message):
     bot.reply_to(message, "Пока! Удачи!")
-    
-    
+
+@bot.message_handler(commands=["photo"])
+def send_photo(message):
+    image = random.choice(images)
+    with open(f'images/{image}', 'rb') as f:  
+        bot.send_photo(message.chat.id, f)
+
+@bot.message_handler(commands=["ship_photo"])
+def send_photo(message):
+    ship = random.choice(ship_images)
+    with open(f'ship_images/{ship}', 'rb') as f:
+        bot.send_photo(message.chat.id, f)
+     
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
     bot.reply_to(message, message.text)
     
 print("Бот запущен")
-
 bot.polling()

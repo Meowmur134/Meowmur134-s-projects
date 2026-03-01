@@ -6,9 +6,10 @@ import os
 
     # Замени 'TOKEN' на токен твоего бота
     # Этот токен ты получаешь от BotFather, чтобы бот мог работать
-bot = telebot.TeleBot("Token")
+bot = telebot.TeleBot("7128259652:AAHFEiWG9tVEvfMGV_u-GrhlhiW9kmPOErU")
 images = os.listdir('images')
 ship_images = os.listdir('ship_images')
+eco_images = os.listdir("eco_images")
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -20,7 +21,7 @@ def send_hello(message):
 
 @bot.message_handler(commands=['help'])
 def send_help(message):
-    bot.reply_to(message, "Команды: start, hello, help, gen_pass, reaction, coin, bye. Также эхо и изменения реакций")
+    bot.reply_to(message, "Команды: start, hello, help, gen_pass, reaction, coin, bye, photo, ship_photo, ecoproblems. Также эхо и изменения реакций")
 
 
 @bot.message_handler(commands=["gen_pass"])
@@ -54,6 +55,22 @@ def send_photo(message):
 def send_photo(message):
     ship = random.choice(ship_images)
     with open(f'ship_images/{ship}', 'rb') as f:
+        bot.send_photo(message.chat.id, f)
+
+@bot.message_handler(commands=["ecoproblems"])
+def send_photo(message):
+    eco_image = random.choice(eco_images)
+    if eco_image == "akkumulyator.jpg":
+        bot.reply_to(message, "Автомобильные аккумуляторы разлагаются 500 лет")
+    elif eco_image == "plastic.jpg":
+        bot.reply_to(message, "Пластик разлагается от 100 до 500 лет")
+    elif eco_image == "pokryshka.jpg":
+        bot.reply_to(message, "Покрышки разлагаются от 100 до 150 лет")
+    elif eco_image == "steklo.jpg":
+        bot.reply_to(message, "Стекло разлагается дольше 1000 лет")
+    elif eco_image == "zhvachka.jpg":
+        bot.reply_to(message, "Жвачка разлагается от 30 до 50 лет")
+    with open(f'eco_images/{eco_image}', 'rb') as f:
         bot.send_photo(message.chat.id, f)
      
 @bot.message_handler(func=lambda message: True)

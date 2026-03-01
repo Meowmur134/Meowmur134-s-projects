@@ -2,7 +2,7 @@ import telebot
 import os
 import random
 
-bot = telebot.TeleBot("7128259652:AAHFEiWG9tVEvfMGV_u-GrhlhiW9kmPOErU")
+bot = telebot.TeleBot("Вставьте сюда свой токен")
 eco_images = os.listdir("eco_images")
 
 @bot.message_handler(commands=["ecoproblems"])
@@ -22,4 +22,5 @@ def send_photo(message):
         bot.send_photo(message.chat.id, f)
 
 print("Бот запущен")
+
 bot.polling()

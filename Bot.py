@@ -6,7 +6,7 @@ import os
 
     # Замени 'TOKEN' на токен твоего бота
     # Этот токен ты получаешь от BotFather, чтобы бот мог работать
-bot = telebot.TeleBot(Введите сюда свой токен)
+bot = telebot.TeleBot("Введите сюда свой токен")
 images = os.listdir('images')
 ship_images = os.listdir('ship_images')
 eco_images = os.listdir("eco_images")
